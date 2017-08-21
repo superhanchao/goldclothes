@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imi.goldcolthes.generator.dao.hAdminMapper">
+  <resultMap id="BaseResultMap" type="com.imi.goldcolthes.entity.hAdmin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="h_userName" jdbcType="VARCHAR" property="hUsername" />
+    <result column="h_passWord" jdbcType="VARCHAR" property="hPassword" />
+    <result column="h_nickName" jdbcType="VARCHAR" property="hNickname" />
+    <result column="h_isPass" jdbcType="INTEGER" property="hIspass" />
+    <result column="h_addTime" jdbcType="TIMESTAMP" property="hAddtime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.imi.goldcolthes.entity.hAdmin">
+    <result column="h_permissions" jdbcType="LONGVARCHAR" property="hPermissions" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, h_userName, h_passWord, h_nickName, h_isPass, h_addTime
+  </sql>
+  <sql id="Blob_Column_List">
+    h_permissions
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from h_admin
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from h_admin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.imi.goldcolthes.entity.hAdmin">
+    insert into h_admin (id, h_userName, h_passWord, 
+      h_nickName, h_isPass, h_addTime, 
+      h_permissions)
+    values (#{id,jdbcType=INTEGER}, #{hUsername,jdbcType=VARCHAR}, #{hPassword,jdbcType=VARCHAR}, 
+      #{hNickname,jdbcType=VARCHAR}, #{hIspass,jdbcType=INTEGER}, #{hAddtime,jdbcType=TIMESTAMP}, 
+      #{hPermissions,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.imi.goldcolthes.entity.hAdmin">
+    insert into h_admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hUsername != null">
+        h_userName,
+      </if>
+      <if test="hPassword != null">
+        h_passWord,
+      </if>
+      <if test="hNickname != null">
+        h_nickName,
+      </if>
+      <if test="hIspass != null">
+        h_isPass,
+      </if>
+      <if test="hAddtime != null">
+        h_addTime,
+      </if>
+      <if test="hPermissions != null">
+        h_permissions,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hUsername != null">
+        #{hUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="hPassword != null">
+        #{hPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="hNickname != null">
+        #{hNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="hIspass != null">
+        #{hIspass,jdbcType=INTEGER},
+      </if>
+      <if test="hAddtime != null">
+        #{hAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hPermissions != null">
+        #{hPermissions,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.imi.goldcolthes.entity.hAdmin">
+    update h_admin
+    <set>
+      <if test="hUsername != null">
+        h_userName = #{hUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="hPassword != null">
+        h_passWord = #{hPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="hNickname != null">
+        h_nickName = #{hNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="hIspass != null">
+        h_isPass = #{hIspass,jdbcType=INTEGER},
+      </if>
+      <if test="hAddtime != null">
+        h_addTime = #{hAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hPermissions != null">
+        h_permissions = #{hPermissions,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.imi.goldcolthes.entity.hAdmin">
+    update h_admin
+    set h_userName = #{hUsername,jdbcType=VARCHAR},
+      h_passWord = #{hPassword,jdbcType=VARCHAR},
+      h_nickName = #{hNickname,jdbcType=VARCHAR},
+      h_isPass = #{hIspass,jdbcType=INTEGER},
+      h_addTime = #{hAddtime,jdbcType=TIMESTAMP},
+      h_permissions = #{hPermissions,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.imi.goldcolthes.entity.hAdmin">
+    update h_admin
+    set h_userName = #{hUsername,jdbcType=VARCHAR},
+      h_passWord = #{hPassword,jdbcType=VARCHAR},
+      h_nickName = #{hNickname,jdbcType=VARCHAR},
+      h_isPass = #{hIspass,jdbcType=INTEGER},
+      h_addTime = #{hAddtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
